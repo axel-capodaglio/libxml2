@@ -16066,6 +16066,7 @@ xmlSchemaCheckCTPropsCorrect(xmlSchemaParserCtxtPtr pctxt,
 			(WXS_ATTRUSE_DECL_TNS(use) ==
 			WXS_ATTRUSE_DECL_TNS(tmp)))
 		    {
+/* AXEL : redefining attributes (for fixed/default) is not an error (MSXML compatibility)
 			xmlChar *str = NULL;
 
 			xmlSchemaCustomErr(ACTXT_CAST pctxt,
@@ -16075,6 +16076,7 @@ xmlSchemaCheckCTPropsCorrect(xmlSchemaParserCtxtPtr pctxt,
 			    xmlSchemaGetComponentDesignation(&str, use),
 			    NULL);
 			FREE_AND_NULL(str);
+*/
 			/*
 			* Remove the duplicate.
 			*/
