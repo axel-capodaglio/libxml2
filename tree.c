@@ -6958,6 +6958,12 @@ xmlSetNsProp(xmlNodePtr node, xmlNsPtr ns, const xmlChar *name,
 	}
 	if (prop->atype == XML_ATTRIBUTE_ID)
 	    xmlAddID(NULL, node->doc, value, prop);
+
+	// AXEL : reset default is setting value
+	// TODO : reset default attr only if different? block setting of fixed attr
+	if (prop->attrXSDType == XML_ATTR_XSD_DEFAULT)
+        prop->attrXSDType = XML_ATTR_XSD_NONE;
+
 	return(prop);
     }
     /*

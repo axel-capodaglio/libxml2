@@ -424,6 +424,14 @@ struct _xmlDtd {
     void          *pentities;   /* Hash table for param entities if any */
 };
 
+// AXEL : additional enum that specifies fixed/default attribute type from XSD
+typedef enum {
+    XML_ATTR_XSD_NONE = 0,
+    XML_ATTR_XSD_DEFAULT = 1,
+    XML_ATTR_XSD_FIXED = 2,
+} xmlAttrXSDType;
+
+
 /**
  * xmlAttr:
  *
@@ -444,6 +452,7 @@ struct _xmlAttr {
     xmlNs           *ns;        /* pointer to the associated namespace */
     xmlAttributeType atype;     /* the attribute type if validating */
     void            *psvi;	/* for type/PSVI information */
+    xmlAttrXSDType	attrXSDType;   // AXEL : additional field that specified fixed/default from XSD
 };
 
 /**

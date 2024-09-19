@@ -25767,15 +25767,21 @@ xmlSchemaVAttributesComplex(xmlSchemaValidCtxtPtr vctxt)
 		    value = BAD_CAST normValue;
 
 		if (iattr->nsName == NULL) {
-		    if (xmlNewProp(defAttrOwnerElem,
-			iattr->localName, value) == NULL) {
+            xmlAttrPtr newAttr = xmlNewProp(defAttrOwnerElem, iattr->localName, value);
+		    if (newAttr == NULL) {
 			VERROR_INT("xmlSchemaVAttributesComplex",
 			    "calling xmlNewProp()");
 			if (normValue != NULL)
 			    xmlFree(normValue);
 			goto internal_error;
 		    }
-		} else {
+
+			// AXEL : save fixed/default attr
+            if (iattr->decl != NULL && iattr->decl->flags & XML_SCHEMAS_ATTR_FIXED)
+                newAttr->attrXSDType = XML_ATTR_XSD_FIXED;
+			else
+                newAttr->attrXSDType = XML_ATTR_XSD_DEFAULT;
+        } else {
 		    xmlNsPtr ns;
 
 		    ns = xmlSearchNsByHref(defAttrOwnerElem->doc,

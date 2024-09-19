@@ -762,6 +762,10 @@ xmlAttrDumpOutput(xmlSaveCtxtPtr ctxt, xmlAttrPtr cur) {
     xmlOutputBufferPtr buf;
 
     if (cur == NULL) return;
+    // AXEL : do not serialize fixed/default attr
+    if (cur->attrXSDType != XML_ATTR_XSD_NONE)
+    	return;
+    	
     buf = ctxt->buf;
     if (buf == NULL) return;
     if (ctxt->format == 2)
